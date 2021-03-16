@@ -5,9 +5,6 @@ import './App.css';
 import HomePage from './containers/HomePage';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     //console.log('apiResponse', this.state.apiResponse)
