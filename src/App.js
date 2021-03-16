@@ -1,25 +1,27 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import HomePage from './containers/HomePage';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    //console.log('apiResponse', this.state.apiResponse)
+
+    return (
+      <div className="App">
+        <header className="App-header" style={{minHeight: '300px'}}>
+          <img src={logo} className="App-logo" alt="logo" />
+        </header>
+        <HomePage/>
+      </div>
+    );
+  }
+
 }
 
 export default App;
