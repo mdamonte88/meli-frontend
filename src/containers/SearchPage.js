@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { getItems } from '../store/actions/item'
 
-class HomePage extends PureComponent {
+class SearchPage extends PureComponent {
 
   componentWillMount() {
     this.props.loadItems();
@@ -22,7 +22,7 @@ class HomePage extends PureComponent {
 
     return (
       <div className="slides-container homepage">
-        Home Page
+        SearchPage
         {this.renderItems(itemsList)} 
       </div>
     );
@@ -40,4 +40,4 @@ const mapState = state => {
     loadItems: () => dispatch(getItems())
   });
   
-  export default connect(mapState, mapDispatch)(HomePage);
+  export default connect(mapState, mapDispatch)(SearchPage);
