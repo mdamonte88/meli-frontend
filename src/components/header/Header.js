@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 
 // Estilos
-import './Header.css';
+import './Header.scss';
 import logo from '../../assets/Logo_ML.png';
 
 class Header extends Component {
