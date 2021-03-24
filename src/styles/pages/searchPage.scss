@@ -1,0 +1,22 @@
+
+.item-search-list{
+    padding: 0 16px;
+    background-color: white;
+
+    .item-search-row {
+        .content-data:nth-child(2) {
+            min-width: 280px;
+        }
+    }  
+}
+
+@media (min-width: 662px) {
+    .item-search-list{
+        .item-search-row {
+            .content-data:nth-child(2) {
+                width: calc(80% - 196px);
+                padding-top: 32px;
+            }
+        }  
+    }
+}

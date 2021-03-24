@@ -1,0 +1,107 @@
+.item-details-container {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 32px;
+
+    .item-details-image {
+        width: 480px;
+        margin: auto;
+
+        img {
+            min-width: 400px;
+        }
+    }
+    .item-details-data {
+        width: auto;
+        text-align: center;
+        margin: 32px auto;
+
+
+        &__condition {
+            font-size: 14px;
+            color: #999999;
+        }
+        &__title {
+            margin-top: 16px;
+            font-size: 24px;
+        }
+        &__price {
+            font-size: 46px;
+            margin: 32px 0;
+        }
+    }
+    .item-details-description {
+        width: 100%;
+        align-self: flex-end;
+        text-align: left;
+        margin: 80px auto;
+
+        &__title {
+            display: block;
+            font-size: 28px;
+        }
+        &__text {
+            display: block;
+            font-size: 16px;
+            color: #999999;
+            margin: 32px 0;
+        }
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .item-details-container {
+        .item-details-image {
+            width: 580px;
+
+            img {
+                min-width: 480px;
+            }
+        }
+    }
+}
+
+
+/*Desktops */
+@media (min-width: 1024px) {
+    .item-details-container {
+        .item-details-image {
+            width: 580px;
+
+            img {
+                min-width: 580px;
+            }
+        }
+
+        .item-details-data {
+            margin: inherit;
+            text-align: left;
+            width: 235px;
+        }
+
+        .item-details-description {
+            margin: 200px auto;
+        }
+    }
+}
+
+/*Desktops */
+@media (min-width: 1400px) {
+    .item-details-container {
+        .item-details-image {
+            width: 680px;
+
+            img {
+                min-width: 580px;
+            }
+        }
+
+        .item-details-description {
+            &__text {
+                max-width: 680px;
+            }
+        }
+    }
+}
