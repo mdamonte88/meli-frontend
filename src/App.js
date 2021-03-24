@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.scss';
 
 import Header from './components/header/Header'
 
@@ -10,14 +9,17 @@ import ItemDetailsPage from './containers/ItemDetailsPage';
 import NotFoundPage from './containers/NotFoundPage';
 
 const App = () => (
-  <div className="App">
-    <Header/>
-
+  <div className="body-content">
     <BrowserRouter>
+      <Header />
       <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path='/items' component={SearchPage} />
-          <Route path='/item' component={ItemDetailsPage} />
+          <Route path='/items/search/:name'
+            render={(props) => (
+              <SearchPage {...props}/>
+            )}
+           />
+          <Route path='/item/:id' component={ItemDetailsPage} />
           <Route component={NotFoundPage} />
       </Switch>
     </BrowserRouter>
