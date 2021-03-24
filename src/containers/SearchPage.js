@@ -1,19 +1,33 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+//import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 import { getItems } from '../store/actions/item'
+import ItemSearchRow from '../components/itemSearchRow/ItemSearchRow'
+
 
 class SearchPage extends PureComponent {
 
   componentWillMount() {
-    this.props.loadItems();
+    // let { name } = useParams();
+    const { name = '' } = this.props.match.params;
+    this.props.loadItems(name);
   }
 
   renderItems(props) { 
     const items = props.map( item => {
-      return <li key={item._id}> {item.title}- U$S {item.price} </li>
+      console.log('itemMap ', item);
+      //It works with mongoDB ids
+      const id = item.id || item._id;
+      return (
+        <Link to={`/item/${id}`} style={{textDecoration: 'none'}}>
+          <ItemSearchRow item={item} />
+        </Link>
+      )
     })
 
-    return <ul> { items } </ul>;
+    return <div className="item-search-list"> { items } </div>;
   }
 
 
@@ -21,8 +35,7 @@ class SearchPage extends PureComponent {
     const { itemsList } = this.props;
 
     return (
-      <div className="slides-container homepage">
-        SearchPage
+      <div className="main-container searchPage">
         {this.renderItems(itemsList)} 
       </div>
     );
@@ -37,7 +50,7 @@ const mapState = state => {
   
   
   const mapDispatch = dispatch => ({
-    loadItems: () => dispatch(getItems())
+    loadItems: (name) => dispatch(getItems(name))
   });
   
   export default connect(mapState, mapDispatch)(SearchPage);
