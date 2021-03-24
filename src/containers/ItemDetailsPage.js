@@ -1,35 +1,52 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { getItemDetails } from '../store/actions/item'
+import BreadCrumb from '../components/breadCrump/BreadCrumb'
 
 class ItemDetailPage extends PureComponent {
 
   componentWillMount() {
-    this.props.loadItem();
+    const { id } = this.props.match.params;
+    this.props.loadItem(id);
   }
 
-  renderItems(item) { 
-    return (
-        <ul> 
-            <li key={`title-${item._id}`}> Title: {item.title}</li>
-            <li key={`price-${item._id}`}> Price: U$S {item.price} </li>
-            <li key={`condition-${item._id}`}> Condition: {item.condition} </li>
-            <li key={`free_shipping-${item._id}`}> Free Shipping: {item.free_shipping} </li>
-            <li key={`sold_quantity-${item._id}`}> Sold Quanity: U$S {item.sold_quantity} </li>
-            <li key={`description-${item._id}`}> Description: {item.description} </li>
-        </ul>
-    );
+  addItemToCart(title) {
+    console.log('item added', title);
   }
-
 
   render() {
     const { itemDetails } = this.props;
-
+    const { picture, condition, sold_quantity = 0, title, price, description } = itemDetails;
+    const crumbs = [
+      {key: 1, name: 'Electronica Audio y Video', path: ''},
+      {key: 2, name: 'Ipod', path: ''},
+      {key: 3, name: 'Ipod touch'},
+      {key: 4, name: '32GB'}
+    ]
     return (
-      <div className="slides-container homepage">
-        ItemDetailPage
-        {this.renderItems(itemDetails)}
-      </div>
+      <>
+        <BreadCrumb crumbs={crumbs} />
+        <div className="main-container itemDetailPage">
+          <div className="item-details-container">
+            <div className="item-details-image">
+              <img src={picture} alt=""/>
+            </div>
+            <div className="item-details-data">
+              <div key={`condition-${itemDetails._id}`} className="item-details-data__condition"> {condition} - {sold_quantity} vendidos</div>
+              <div key={`title-${itemDetails._id}`} className="item-details-data__title"> {title}</div>
+              <div key={`price-${itemDetails._id}`} className="item-details-data__price"> $ {price} </div>
+              
+              <button className="x-small outlined" data-testid="btn-item-add" onClick={() => this.addItemToCart(title)}>
+                Comprar
+              </button>
+            </div>
+            <div className="item-details-description">
+              <span className="item-details-description__title"> Description del producto </span>
+              <span className="item-details-description__text"> {description} </span> 
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }
@@ -42,7 +59,7 @@ const mapState = state => {
   
   
   const mapDispatch = dispatch => ({
-    loadItem: () => dispatch(getItemDetails('604e590ed564c60d21eb3fb3'))
+    loadItem: (id) => dispatch(getItemDetails(id))
   });
   
   export default connect(mapState, mapDispatch)(ItemDetailPage);
