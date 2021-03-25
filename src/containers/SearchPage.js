@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 //import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-import { getItems } from '../store/actions/item'
-import ItemSearchRow from '../components/itemSearchRow/ItemSearchRow'
+import { getItems } from '../store/actions/item';
+import ItemSearchRow from '../components/itemSearchRow/ItemSearchRow';
+import BreadCrumb from '../components/breadCrump/BreadCrumb';
 
 
 class SearchPage extends PureComponent {
@@ -32,19 +33,23 @@ class SearchPage extends PureComponent {
 
 
   render() {
-    const { itemsList } = this.props;
-
+    const { itemsList, categories } = this.props;
+    
     return (
-      <div className="main-container searchPage">
-        {this.renderItems(itemsList)} 
-      </div>
+      <>
+        <BreadCrumb crumbs={categories} />
+        <div className="main-container searchPage">
+          {this.renderItems(itemsList)} 
+        </div>
+      </>
     );
   }
 }
 
 const mapState = state => {
     return ({
-      itemsList: state.items.itemsList.toJS()
+      itemsList: state.items.itemsList.toJS(),
+      categories: state.items.categories.toJS()
     });
   }
   

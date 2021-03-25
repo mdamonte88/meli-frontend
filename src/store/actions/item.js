@@ -5,7 +5,8 @@ export const getItems = (query) => async dispatch => {
   apiService.get(`/items/${query}`).then(res => {
     dispatch({
       type: GET_ITEMS,
-      payload: res.items
+      payload: res.items,
+      categories: res.categories
     });
   })
 };

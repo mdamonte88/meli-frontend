@@ -10,7 +10,7 @@ const Breadcrumb = ({ crumbs }) => {
     return null;
   }
   return (
-    <nav className="nav-header" style={{margin: 'auto', maxWidth: '980px', textAlign: 'left'}}>
+    <nav className="nav-header" style={{margin: 'auto', maxWidth: '1200px', textAlign: 'left'}}>
       {/* Link back to any previous steps of the breadcrumb. */}
       {crumbs.map(({ name, path }, key) =>
         key + 1 === crumbs.length ? (
@@ -19,7 +19,7 @@ const Breadcrumb = ({ crumbs }) => {
           </span>
         ) : (
           <Link key={key} to={path}>
-            {name}>  
+            {name} {" > "}
           </Link>
         )
       )}

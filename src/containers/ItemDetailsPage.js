@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { getItemDetails } from '../store/actions/item'
-import BreadCrumb from '../components/breadCrump/BreadCrumb'
+import { getItemDetails } from '../store/actions/item';
+import BreadCrumb from '../components/breadCrump/BreadCrumb';
 
 class ItemDetailPage extends PureComponent {
 
@@ -15,17 +15,12 @@ class ItemDetailPage extends PureComponent {
   }
 
   render() {
-    const { itemDetails } = this.props;
+    const { itemDetails, categories } = this.props;
     const { picture, condition, sold_quantity = 0, title, price, description } = itemDetails;
-    const crumbs = [
-      {key: 1, name: 'Electronica Audio y Video', path: ''},
-      {key: 2, name: 'Ipod', path: ''},
-      {key: 3, name: 'Ipod touch'},
-      {key: 4, name: '32GB'}
-    ]
+    
     return (
       <>
-        <BreadCrumb crumbs={crumbs} />
+        <BreadCrumb crumbs={categories} />
         <div className="main-container itemDetailPage">
           <div className="item-details-container">
             <div className="item-details-image">
@@ -53,7 +48,8 @@ class ItemDetailPage extends PureComponent {
 
 const mapState = state => {
     return ({
-      itemDetails: state.items.itemDetails.toJS()
+      itemDetails: state.items.itemDetails.toJS(),
+      categories: state.items.categories.toJS()
     });
   }
   

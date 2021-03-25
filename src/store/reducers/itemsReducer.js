@@ -3,16 +3,18 @@ import { GET_ITEMS, GET_ITEM, GET_ITEM_DETAILS, ADD_ITEM, UPDATE_ITEM, REMOVE_IT
 
 const initialState = {
   itemsList: List(),
+  categories: List(),
   itemDetails: Map({}),
 };
 
 const moviesReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload, categories } = action;
   switch (type) {
     case GET_ITEMS:
       return {
         ...state,
-        itemsList: fromJS(payload)
+        itemsList: fromJS(payload),
+        categories: fromJS(categories)
       };
     case GET_ITEM:
       const indexElement = state.itemsList.toJS().findIndex(({_id}) => _id === payload._id);
