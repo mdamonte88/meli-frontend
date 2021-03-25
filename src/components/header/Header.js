@@ -30,6 +30,12 @@ class Header extends Component {
         this.setState(() => ({ query: value }) );
     }
 
+    handleKeyDown(e) {
+        if (e.key === 'Enter') {
+            this.goSearchPage();
+        }
+    }
+
     render() {
         return (
             <header className="app-header" style={{minHeight: '50px', maxHeight: '150px'}}>
@@ -40,6 +46,7 @@ class Header extends Component {
                     className = "search-input"
                     placeholder="Nunca dejes de buscar"
                     onChange={(e) => this.handleOnchange(e)}
+                    onKeyDown={(e) => this.handleKeyDown(e)}
                 />
                 <button className="search-button" type="submit" onClick={() => this.goSearchPage()}/>
             </header>
