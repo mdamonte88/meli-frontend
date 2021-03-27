@@ -15,9 +15,9 @@ class ItemDetailPage extends PureComponent {
   }
 
   render() {
-    const { itemDetails, categories } = this.props;
-    const { picture, condition, sold_quantity = 0, title, price, description } = itemDetails;
-    
+    const { itemDetails } = this.props;
+    const { picture, condition, sold_quantity = 0, title, price, description, categories=[] } = itemDetails;
+
     return (
       <>
         <BreadCrumb crumbs={categories} />
@@ -48,8 +48,7 @@ class ItemDetailPage extends PureComponent {
 
 const mapState = state => {
     return ({
-      itemDetails: state.items.itemDetails.toJS(),
-      categories: state.items.categories.toJS()
+      itemDetails: state.items.itemDetails.toJS()
     });
   }
   
