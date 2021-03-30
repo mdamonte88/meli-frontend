@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .nav-header {
     padding: 15px 0;
     font-size: 14px;
@@ -7,7 +9,7 @@
 
     a, span {
         text-decoration: none;
-        color: #999999;
+        color: $gray;
     }
 
 }

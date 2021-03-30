@@ -1,10 +1,12 @@
+@import '../../styles/variables';
+
 .item-search-row{
     padding: 16px 0;
-    color: #999999;
+    color: $gray;
     font-size: 14px;
     display: flex;
     flex-wrap: wrap;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid $whisper;
 
     .content-data {
         width: 20%;
@@ -43,7 +45,7 @@
     }
 
     .content-data:nth-child(1) {
-        width: 180px;
+        width: 280px;
         padding-right: 16px;
     } 
     .content-data:nth-child(2) {

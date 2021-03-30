@@ -1,15 +1,15 @@
 .item-details-container {
-    background-color: white;
+    background-color: $white;
     display: flex;
     flex-wrap: wrap;
     padding: 32px;
 
     .item-details-image {
-        width: 480px;
+        width: 280px;
         margin: auto;
 
         img {
-            min-width: 280px;
+            min-width: 200px;
             max-width: 100%;
         }
     }
@@ -21,7 +21,7 @@
 
         &__condition {
             font-size: 14px;
-            color: #999999;
+            color: $gray;
         }
         &__title {
             margin-top: 16px;
@@ -45,7 +45,7 @@
         &__text {
             display: block;
             font-size: 16px;
-            color: #999999;
+            color: $gray;
             margin: 32px 0;
         }
     }
