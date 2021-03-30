@@ -14,7 +14,12 @@ class Header extends Component {
         };
     }
 
+    setQuery(query) {
+        this.setState(() => ({ query: query }) );
+    }
+
     goHome() {
+        this.setQuery('');
         this.props.history.push('/');
     }
 
@@ -26,7 +31,7 @@ class Header extends Component {
 
     handleOnchange(e) {
         const value = e.nativeEvent.target.value;
-        this.setState(() => ({ query: value }) );
+        this.setQuery(value);
     }
 
     handleKeyDown(e) {

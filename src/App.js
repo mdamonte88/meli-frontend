@@ -14,11 +14,7 @@ const App = () => (
       <Header />
       <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route path='/items/search/:name'
-            render={(props) => (
-              <SearchPage {...props}/>
-            )}
-           />
+          <Route path='/items/search/:name' component={SearchPage}/>
           <Route path='/item/:id' component={ItemDetailsPage} />
           <Route component={NotFoundPage} />
       </Switch>

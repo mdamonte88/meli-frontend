@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 // Estilos
@@ -26,4 +27,10 @@ const Breadcrumb = ({ crumbs }) => {
       </nav>
   );
 };
+
+Breadcrumb.propTypes = {
+    crumbs: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+  
 export default Breadcrumb;

@@ -11,14 +11,21 @@ import BreadCrumb from '../components/breadCrump/BreadCrumb';
 class SearchPage extends PureComponent {
 
   componentWillMount() {
-    // let { name } = useParams();
     const { name = '' } = this.props.match.params;
     this.props.loadItems(name);
-  }
+  } 
+
+  componentWillUpdate(nextProps) {
+    const { name = '' } = this.props.match.params;
+    const { name:nextName } =  nextProps.match.params;
+
+    if(name === '' || (name !== nextName)) {
+      this.props.loadItems(nextName);
+    }
+  }  
 
   renderItems(props) { 
     const items = props.map( item => {
-      console.log('itemMap ', item);
       //It works with mongoDB ids
       const id = item.id || item._id;
       return (
@@ -30,7 +37,6 @@ class SearchPage extends PureComponent {
 
     return <div className="item-search-list"> { items } </div>;
   }
-
 
   render() {
     const { itemsList, categories } = this.props;
