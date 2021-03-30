@@ -1,61 +1,52 @@
-import React, { Component } from 'react';
+import React, { useRef, useState } from 'react';
 import { withRouter } from "react-router";
 
 // Estilos
 import './Header.scss';
 import logo from '../../assets/Logo_ML.png';
 
-class Header extends Component {
+const Header = ({history}) => {
+    const [query, setQuery] = useState('');
+    const searchInput = useRef(null);
+    
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            query: ''
-        };
+    const goHome = () => {
+        setQuery('');
+        history.push('/');
+        searchInput.current.value = '';
     }
 
-    setQuery(query) {
-        this.setState(() => ({ query: query }) );
-    }
-
-    goHome() {
-        this.setQuery('');
-        this.props.history.push('/');
-    }
-
-    goSearchPage() {
-        const { query } = this.state;
+    const goSearchPage = () => {
         const url = '/items/search/'+ query
-        this.props.history.push(url);
+        history.push(url);
     }
 
-    handleOnchange(e) {
+    const handleOnchange = (e) => {
         const value = e.nativeEvent.target.value;
-        this.setQuery(value);
+        setQuery(value);
     }
 
-    handleKeyDown(e) {
+    const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
-            this.goSearchPage();
+            goSearchPage();
         }
     }
 
-    render() {
-        return (
-            <header className="app-header" style={{minHeight: '50px', maxHeight: '150px'}}>
-                 <img src={logo} className="app-logo" alt="logo" onClick={() => this.goHome()} />
-                
-                <input 
-                    type="text" 
-                    className = "search-input"
-                    placeholder="Nunca dejes de buscar"
-                    onChange={(e) => this.handleOnchange(e)}
-                    onKeyDown={(e) => this.handleKeyDown(e)}
-                />
-                <button className="search-button" type="submit" onClick={() => this.goSearchPage()}/>
-            </header>
-        );
-    }
+    return (
+        <header className="app-header" style={{minHeight: '50px', maxHeight: '150px'}}>
+                <img src={logo} className="app-logo" alt="logo" onClick={() => goHome()} />
+            
+            <input 
+                type="text" 
+                ref={searchInput}
+                className = "search-input"
+                placeholder="Nunca dejes de buscar"
+                onChange={(e) => handleOnchange(e)}
+                onKeyDown={(e) => handleKeyDown(e)}
+            />
+            <button className="search-button" type="submit" onClick={() => goSearchPage()}/>
+        </header>
+    );
 }
 
 export default withRouter(Header);
