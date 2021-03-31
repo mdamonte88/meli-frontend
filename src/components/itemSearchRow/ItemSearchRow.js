@@ -10,10 +10,10 @@ const ItemSearchRow = ({ item = {} }) => {
 
   return (
     <div className="item-search-row" key={item._id}>
-        <div className="content-data">
+        <div className="content-data left">
             <img className="content-data__thumbnail" src={picture} alt=""/>
         </div>
-        <div className="content-data">
+        <div className="content-data middle">
             <span className="content-data__price"> $ {price}
                 {item.free_shipping && (
                     <span className="free-shipping"> </span>
@@ -23,7 +23,7 @@ const ItemSearchRow = ({ item = {} }) => {
             <span className="content-data__description"> {title }</span>
             <span className="content-data__condition"> { condition } </span>
         </div>
-        <div className="content-data">
+        <div className="content-data right">
             <span className="content-data__location"> { state_name } </span>
         </div>
     </div>
