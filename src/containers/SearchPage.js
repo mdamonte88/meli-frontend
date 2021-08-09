@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 //import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -7,29 +7,20 @@ import { getItems } from '../store/actions/item';
 import ItemSearchRow from '../components/itemSearchRow/ItemSearchRow';
 import BreadCrumb from '../components/breadCrump/BreadCrumb';
 
+const SearchPage = ({ match, loadItems, itemsList, categories }) => {
+  const { name = '' } = match.params;
 
-class SearchPage extends PureComponent {
+  useEffect(() => {
+    loadItems(name);
+  }, [name, loadItems]);
 
-  componentWillMount() {
-    const { name = '' } = this.props.match.params;
-    this.props.loadItems(name);
-  } 
-
-  componentWillUpdate(nextProps) {
-    const { name = '' } = this.props.match.params;
-    const { name:nextName } =  nextProps.match.params;
-
-    if(name === '' || (name !== nextName)) {
-      this.props.loadItems(nextName);
-    }
-  }  
-
-  renderItems(props) { 
+  const renderItems = (props) => { 
     const items = props.map( item => {
       //It works with mongoDB ids
       const id = item.id || item._id;
+
       return (
-        <Link to={`/item/${id}`} style={{textDecoration: 'none'}}>
+        <Link key={`searchRow-${id}`} to={`/item/${id}`} style={{textDecoration: 'none'}}>
           <ItemSearchRow item={item} />
         </Link>
       )
@@ -37,19 +28,15 @@ class SearchPage extends PureComponent {
 
     return <div className="item-search-list"> { items } </div>;
   }
-
-  render() {
-    const { itemsList, categories } = this.props;
     
-    return (
-      <>
-        <BreadCrumb crumbs={categories} />
-        <div className="main-container searchPage">
-          {this.renderItems(itemsList)} 
-        </div>
-      </>
-    );
-  }
+  return (
+    <>
+      <BreadCrumb crumbs={categories} />
+      <div className="main-container searchPage">
+        {renderItems(itemsList)} 
+      </div>
+    </>
+  );
 }
 
 const mapState = state => {
